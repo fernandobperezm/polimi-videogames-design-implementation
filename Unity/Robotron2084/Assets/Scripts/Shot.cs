@@ -30,7 +30,9 @@ public class Shot : MonoBehaviour {
 		go.transform.position = other.gameObject.transform.position;
 		go.transform.rotation = other.gameObject.transform.rotation;
 		SoundManager.Instance.GruntExplodes ();
-		Destroy (other.gameObject);
+		//Destroy (other.gameObject);
+		other.gameObject.SetActive(false);
+		GameManager.Instance.Scored (100);
 		//Destroy (gameObject);
 		gameObject.SetActive(false);
 	}
