@@ -45,6 +45,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\EventSystemExample\Script\EventManager.cs" />
+     <Compile Include="Assets\EventSystemExample\Script\EventTrigger.cs" />
+     <Compile Include="Assets\EventSystemExample\Script\GruntEvent.cs" />
+     <Compile Include="Assets\EventSystemExample\Script\GruntEventExplosion.cs" />
+     <Compile Include="Assets\EventSystemExample\Script\GruntSpawn.cs" />
      <Compile Include="Assets\Scripts\GameManager.cs" />
      <Compile Include="Assets\Scripts\Grunt.cs" />
      <Compile Include="Assets\Scripts\GruntExplodes.cs" />
