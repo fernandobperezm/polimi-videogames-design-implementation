@@ -33,6 +33,10 @@ public class GameManager : MonoBehaviour {
 	[Range(0f,4f)]
 	public float m_loading_time = 2f;
 
+	[Header("Levels")]
+	public Level[] m_levels;
+
+
 	void Awake() {
 		// Singleton.
 		if (Instance == null) {
@@ -75,7 +79,13 @@ public class GameManager : MonoBehaviour {
 	}
 
 	void InitLevel (int level) {
-		int no_grunts = level*5;
+		int no_grunts = 0;
+		if (level <= 4)
+			no_grunts = m_levels [level - 1].m_no_grunts;
+		else
+			no_grunts = m_levels [3].m_no_grunts;
+
+		// no_grunts = m_levels [(int)Mathf.Min (level-1,3)].m_no_grunts;
 
 		m_no_grunts_alive = no_grunts;
 

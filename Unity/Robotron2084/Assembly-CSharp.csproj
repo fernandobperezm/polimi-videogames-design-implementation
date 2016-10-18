@@ -48,6 +48,7 @@
      <Compile Include="Assets\Scripts\GameManager.cs" />
      <Compile Include="Assets\Scripts\Grunt.cs" />
      <Compile Include="Assets\Scripts\GruntExplodes.cs" />
+     <Compile Include="Assets\Scripts\Level.cs" />
      <Compile Include="Assets\Scripts\ObjectPool.cs" />
      <Compile Include="Assets\Scripts\ObjectPoolingManager.cs" />
      <Compile Include="Assets\Scripts\Player.cs" />
