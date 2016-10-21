@@ -40,14 +40,18 @@ public class Player : MonoBehaviour {
 				m_shot_prefab,
 				m_shot_right.position,
 				m_shot_right.rotation) as GameObject;
+			
+			SoundManager.Instance.PlayerShots();
 		}
 
 		// Left shooting.
 		if (Input.GetKeyDown (KeyCode.J)) {
 			GameObject go = Instantiate (
-				                m_shot_prefab,
-				                m_shot_left.position,
-				                m_shot_left.rotation) as GameObject;
+                m_shot_prefab,
+                m_shot_left.position,
+                m_shot_left.rotation) as GameObject;
+
+			SoundManager.Instance.PlayerShots ();
 		}
 
 		// Up shooting
@@ -56,6 +60,8 @@ public class Player : MonoBehaviour {
 				m_shot_prefab,
 				m_shot_up.position,
 				m_shot_up.rotation) as GameObject;
+
+			SoundManager.Instance.PlayerShots ();
 		}
 
 		// Down Shooting
@@ -64,6 +70,8 @@ public class Player : MonoBehaviour {
 				m_shot_prefab,
 				m_shot_down.position,
 				m_shot_down.rotation) as GameObject;
+
+			SoundManager.Instance.PlayerShots ();
 		}
 	}
 
