@@ -21,12 +21,12 @@ public class Shot : MonoBehaviour {
 	void Update () {
 		//Checking if the shot goes width farther.
 		if (Mathf.Abs (tr.position.x) > 240) {
-			Destroy (gameObject);
+			gameObject.SetActive (false);
 		}
 
 		// Checking if the shot goes height farther.
 		if (Mathf.Abs (tr.position.y) > 110) {
-			Destroy (gameObject);
+			gameObject.SetActive (false);
 		}
 	}
 
@@ -40,7 +40,7 @@ public class Shot : MonoBehaviour {
 		Debug.Log ("Hit " + otherGameObject.gameObject.name);
 
 		// Instantiation of the grunt explodes game object.
-		GameObject go = Instantiate (m_grunt_explodes);
+		GameObject go = ObjectPoolingManager.Instance.GetObject (m_grunt_explodes.name);
 
 		// Setting the position and rotation of the grunt exploded in the same as the grunt already shoted.
 		go.transform.position = otherGameObject.transform.position;
@@ -50,7 +50,7 @@ public class Shot : MonoBehaviour {
 		SoundManager.Instance.GruntExplodes ();
 
 		// Destroying the shot and the grunt.
-		Destroy (otherGameObject.gameObject);
-		Destroy (gameObject);
+		otherGameObject.gameObject.SetActive (false);
+		gameObject.SetActive (false);
 	}
 }

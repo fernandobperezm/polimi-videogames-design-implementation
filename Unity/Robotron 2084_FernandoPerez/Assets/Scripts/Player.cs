@@ -36,40 +36,39 @@ public class Player : MonoBehaviour {
 
 		// Right Shooting.
 		if (Input.GetKeyDown (KeyCode.L)) {
-			GameObject go = Instantiate (
-				m_shot_prefab,
-				m_shot_right.position,
-				m_shot_right.rotation) as GameObject;
+			GameObject go = ObjectPoolingManager.Instance.GetObject (m_shot_prefab.name);
+			go.transform.position = m_shot_right.position;
+			go.transform.rotation = m_shot_right.rotation;
 			
 			SoundManager.Instance.PlayerShots();
 		}
 
 		// Left shooting.
 		if (Input.GetKeyDown (KeyCode.J)) {
-			GameObject go = Instantiate (
-                m_shot_prefab,
-                m_shot_left.position,
-                m_shot_left.rotation) as GameObject;
+			GameObject go = ObjectPoolingManager.Instance.GetObject (m_shot_prefab.name);
+			go.transform.position = m_shot_left.position;
+			go.transform.rotation = m_shot_left.rotation;
+
 
 			SoundManager.Instance.PlayerShots ();
 		}
 
 		// Up shooting
 		if (Input.GetKeyDown (KeyCode.I)) {
-			GameObject go = Instantiate (
-				m_shot_prefab,
-				m_shot_up.position,
-				m_shot_up.rotation) as GameObject;
+			GameObject go = ObjectPoolingManager.Instance.GetObject (m_shot_prefab.name);
+			go.transform.position = m_shot_up.position;
+			go.transform.rotation = m_shot_up.rotation;
+
 
 			SoundManager.Instance.PlayerShots ();
 		}
 
 		// Down Shooting
 		if (Input.GetKeyDown (KeyCode.K)) {
-			GameObject go = Instantiate (
-				m_shot_prefab,
-				m_shot_down.position,
-				m_shot_down.rotation) as GameObject;
+			GameObject go = ObjectPoolingManager.Instance.GetObject (m_shot_prefab.name);
+			go.transform.position = m_shot_down.position;
+			go.transform.rotation = m_shot_down.rotation;
+
 
 			SoundManager.Instance.PlayerShots ();
 		}
