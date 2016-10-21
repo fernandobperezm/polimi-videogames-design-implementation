@@ -2,10 +2,15 @@
 using System.Collections;
 
 public class Shot : MonoBehaviour {
+
 	Transform tr;
 
+	// Prefab of the grunt explotion. With this, we can handle the explotion.
+	public GameObject m_grunt_explodes;
 
-	float m_shot = 100f;
+	[Header ("Shoot speed")]
+	[Range (60f,250f)]
+	public float m_shot = 100f;
 
 	// Use this for initialization
 	void Start () {
@@ -25,7 +30,27 @@ public class Shot : MonoBehaviour {
 		}
 	}
 
+	// Movement of the shot.
 	void FixedUpdate () {
 		tr.position += tr.right * Time.fixedDeltaTime * m_shot;
+	}
+
+	// Triggered when a collision happens.
+	void OnTriggerEnter2D (Collider2D otherGameObject) {
+		Debug.Log ("Hit " + otherGameObject.gameObject.name);
+
+		// Instantiation of the grunt explodes game object.
+		GameObject go = Instantiate (m_grunt_explodes);
+
+		// Setting the position and rotation of the grunt exploded in the same as the grunt already shoted.
+		go.transform.position = otherGameObject.transform.position;
+		go.transform.rotation = otherGameObject.transform.rotation;
+
+		// Activating sound.
+		SoundManager.Instance.GruntExplodes ();
+
+		// Destroying the shot and the grunt.
+		Destroy (otherGameObject.gameObject);
+		Destroy (gameObject);
 	}
 }

@@ -86,6 +86,7 @@
 -define:UNITY_EDITOR_OSX
 -define:UNITY_TEAM_LICENSE
 'Assets/Scripts/Grunt.cs'
+'Assets/Scripts/GruntExplodes.cs'
 'Assets/Scripts/Player.cs'
 'Assets/Scripts/Shot.cs'
 'Assets/Scripts/SoundManager.cs'

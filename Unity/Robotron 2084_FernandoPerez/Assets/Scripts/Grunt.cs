@@ -5,7 +5,7 @@ public class Grunt : MonoBehaviour {
 
 	Transform tr;
 
-	GameObject player;
+	GameObject player; // As the grunts follows the player, we need their directions.
 
 	[Header ("Grunt Speed")]
 	[Range(25f,200f)]
@@ -24,7 +24,7 @@ public class Grunt : MonoBehaviour {
 			(player.transform.position - tr.position).normalized;
 
 		// Following the player.
-		tr.position += direction * m_speed * Time.deltaTime;
+		tr.position = tr.position +  direction * m_speed * Time.deltaTime;
 		
 	}
 }
