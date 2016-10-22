@@ -15,8 +15,8 @@ public class Player : MonoBehaviour {
 
 	// Configuration for player speed.
 	[Header("Player Speed")]
-	[Range(25f,100f)]
-	public float m_speed = 50f;
+	[Range(100f,300f)]
+	public float m_speed = 150f;
 
 	// Get the keyboard input.
 	float m_horizontal = 0f;
@@ -36,10 +36,12 @@ public class Player : MonoBehaviour {
 
 		// Right Shooting.
 		if (Input.GetKeyDown (KeyCode.L)) {
+			
 			GameObject go = ObjectPoolingManager.Instance.GetObject (m_shot_prefab.name);
 			go.transform.position = m_shot_right.position;
 			go.transform.rotation = m_shot_right.rotation;
-			
+
+			Debug.Log ("Arrow:" + go.transform.position.ToString () + " - " + go.transform.rotation.ToString ());
 			SoundManager.Instance.PlayerShots();
 		}
 

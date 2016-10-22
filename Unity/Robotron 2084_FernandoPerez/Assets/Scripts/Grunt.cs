@@ -9,7 +9,7 @@ public class Grunt : MonoBehaviour {
 
 	[Header ("Grunt Speed")]
 	[Range(25f,200f)]
-	public float m_speed = 25f;
+	public float m_speed = 50f;
 
 	// Use this for initialization
 	void Start () {

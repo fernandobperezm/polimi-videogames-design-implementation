@@ -9,8 +9,8 @@ public class Shot : MonoBehaviour {
 	public GameObject m_grunt_explodes;
 
 	[Header ("Shoot speed")]
-	[Range (60f,250f)]
-	public float m_shot = 100f;
+	[Range (250f,500f)]
+	public float m_shot = 300f;
 
 	// Use this for initialization
 	void Start () {
@@ -20,12 +20,12 @@ public class Shot : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		//Checking if the shot goes width farther.
-		if (Mathf.Abs (tr.position.x) > 240) {
+		if (Mathf.Abs (tr.position.x) > 670) {
 			gameObject.SetActive (false);
 		}
 
 		// Checking if the shot goes height farther.
-		if (Mathf.Abs (tr.position.y) > 110) {
+		if (Mathf.Abs (tr.position.y) > 470) {
 			gameObject.SetActive (false);
 		}
 	}

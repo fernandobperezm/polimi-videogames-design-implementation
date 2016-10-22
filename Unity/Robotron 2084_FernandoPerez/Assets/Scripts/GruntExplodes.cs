@@ -4,13 +4,12 @@ using System.Collections;
 public class GruntExplodes : MonoBehaviour {
 
 	// Use this for initialization
-	void Start () {
-		StartCoroutine (WaitForAnimation());
+	void OnEnable () {
+		StartCoroutine (WaitForAnimation ());
 	}
 
-	// Coroutine for explotion.
-	IEnumerator WaitForAnimation(){
-		yield return new WaitForSeconds (.5f);
+	IEnumerator WaitForAnimation() {
+		yield return new WaitForSeconds (.25f);
 		gameObject.SetActive(false);
 	}
 }
