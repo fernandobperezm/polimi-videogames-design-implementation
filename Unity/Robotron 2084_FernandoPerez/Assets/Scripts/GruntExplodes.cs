@@ -9,7 +9,7 @@ public class GruntExplodes : MonoBehaviour {
 	}
 
 	IEnumerator WaitForAnimation() {
-		yield return new WaitForSeconds (.25f);
+		yield return new WaitForSeconds (.5f);
 		gameObject.SetActive(false);
 	}
 }

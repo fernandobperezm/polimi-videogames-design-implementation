@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour {
 	public GameObject m_shot;
 	public GameObject m_grunt;
 	public GameObject m_grunt_explodes;
+	public GameObject m_hulk;
+	public GameObject m_hulk_explodes;
 
 	void Awake () {
 		//Singleton.
@@ -25,6 +27,8 @@ public class GameManager : MonoBehaviour {
 		ObjectPoolingManager.Instance.CreatePool (m_shot, 100, 100);
 		ObjectPoolingManager.Instance.CreatePool (m_grunt, 100, 100);
 		ObjectPoolingManager.Instance.CreatePool (m_grunt_explodes, 100, 100);
+		ObjectPoolingManager.Instance.CreatePool (m_hulk, 100, 100);
+		ObjectPoolingManager.Instance.CreatePool (m_hulk_explodes, 100, 100);
 
 		// Creating a fized number of grunt forming a circle with center on the players position.
 		for (int i = 0; i < 10; i++) {			
@@ -41,6 +45,22 @@ public class GameManager : MonoBehaviour {
 			go.transform.position = np;
 			go.transform.rotation = Quaternion.identity;
 		}
+
+		for (int i = 0; i < 4; i++) {			
+			GameObject go = ObjectPoolingManager.Instance.GetObject (m_hulk.name);
+
+			Vector3 np = new Vector3 ();
+			np.x = ((Random.Range (0,2) * 2) - 1) * Random.Range (400f,600f);
+			np.y = ((Random.Range (0,2) * 2) - 1) * Random.Range (100f,200f);
+			np.z = transform.position.z;
+
+			Debug.Log ("Position: " + np.ToString ());
+			go.transform.position = np;
+			go.transform.rotation = Quaternion.identity;
+		}
+
+
+
 	}
 //
 //	IEnumerator NextLevel() {

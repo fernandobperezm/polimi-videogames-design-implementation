@@ -41,7 +41,6 @@ public class Player : MonoBehaviour {
 			go.transform.position = m_shot_right.position;
 			go.transform.rotation = m_shot_right.rotation;
 
-			Debug.Log ("Arrow:" + go.transform.position.ToString () + " - " + go.transform.rotation.ToString ());
 			SoundManager.Instance.PlayerShots();
 		}
 
@@ -50,7 +49,6 @@ public class Player : MonoBehaviour {
 			GameObject go = ObjectPoolingManager.Instance.GetObject (m_shot_prefab.name);
 			go.transform.position = m_shot_left.position;
 			go.transform.rotation = m_shot_left.rotation;
-
 
 			SoundManager.Instance.PlayerShots ();
 		}
@@ -61,7 +59,6 @@ public class Player : MonoBehaviour {
 			go.transform.position = m_shot_up.position;
 			go.transform.rotation = m_shot_up.rotation;
 
-
 			SoundManager.Instance.PlayerShots ();
 		}
 
@@ -70,7 +67,6 @@ public class Player : MonoBehaviour {
 			GameObject go = ObjectPoolingManager.Instance.GetObject (m_shot_prefab.name);
 			go.transform.position = m_shot_down.position;
 			go.transform.rotation = m_shot_down.rotation;
-
 
 			SoundManager.Instance.PlayerShots ();
 		}
