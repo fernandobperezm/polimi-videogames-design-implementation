@@ -2,8 +2,11 @@
 using System.Collections;
 
 public class Hulk : Living {
-	// Hulks doesn't chase the player, they have a circular movement around they creation spot. But they have three lives.
 
+	[Header ("Hulk Exploding prefab.")]
+	public GameObject m_hulk_explodes;
+
+	// Hulks doesn't chase the player, they have a circular movement around they creation spot. But they have three lives.
 	private int m_hulk_lives;
 	float m_hulk_angle = 0f; // angle
 	float m_hulk_ratio = 0f; // ratio
@@ -17,7 +20,21 @@ public class Hulk : Living {
 	}
 
 	void OnEnable() {
+		EventManager.StartListening ("Explode",Explode);
 		this.m_no_lives = 3;
+	}
+
+	void Explode() {
+		EventManager.StopListening ("Explode",Explode);
+		StartCoroutine (ExplodeCoroutine ());
+	}
+
+	IEnumerator ExplodeCoroutine () {
+		yield return new WaitForSeconds (0.01f);
+		GameObject go = ObjectPoolingManager.Instance.GetObject (m_hulk_explodes.name);
+		go.transform.position = gameObject.transform.position;
+		go.transform.rotation = gameObject.transform.rotation;
+		gameObject.SetActive (false);
 	}
 	
 	// Update is called once per frame

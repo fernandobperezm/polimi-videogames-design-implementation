@@ -5,6 +5,9 @@ public class Grunt : Living {
 
 	Transform tr;
 
+	[Header ("Grunt Explodes Prefab")]
+	public GameObject m_grunt_explodes;
+
 	GameObject player; // As the grunts follows the player, we need their directions.
 
 	[Header ("Grunt Speed")]
@@ -19,7 +22,23 @@ public class Grunt : Living {
 	}
 
 	void OnEnable () {
+		EventManager.StartListening ("Explode",Explode);
+		player = GameObject.FindGameObjectWithTag ("Player");
+		tr = GetComponent<Transform> () as Transform;
 		this.m_no_lives = 1;
+	}
+
+	void Explode() {
+		EventManager.StopListening ("Explode",Explode);
+		StartCoroutine (ExplodeCoroutine ());
+	}
+
+	IEnumerator ExplodeCoroutine () {
+		yield return new WaitForSeconds (0.01f);
+		GameObject go = ObjectPoolingManager.Instance.GetObject (m_grunt_explodes.name);
+		go.transform.position = gameObject.transform.position;
+		go.transform.rotation = gameObject.transform.rotation;
+		gameObject.SetActive (false);
 	}
 	
 	// Update is called once per frame

@@ -5,7 +5,7 @@ public class Player : Living {
 	// Transform to get player's positions.
 	Transform tr;
 
-	[Header ("Player Explodes")]
+	[Header ("Player Explodes Prefab")]
 	public GameObject m_player_explodes;
 
 	[Header ("Shot Positions")]
@@ -38,7 +38,28 @@ public class Player : Living {
 	// Collider for player
 	BoxCollider2D m_player_collider;
 
+	void OnEnable() {
+		EventManager.StartListening ("Explode",Explode);
+		tr = GetComponent<Transform> () as Transform;
+		m_animator = GetComponent<Animator> () as Animator;
+		m_player_collider = GetComponent <BoxCollider2D> () as BoxCollider2D;
+		this.m_no_lives = 4;
 
+		tr.position = tr.right * 0;
+	}
+
+	void Explode() {
+		EventManager.StopListening ("Explode",Explode);
+		StartCoroutine (ExplodeCoroutine ());
+	}
+
+	IEnumerator ExplodeCoroutine () {
+		yield return new WaitForSeconds (0.01f);
+		GameObject go = ObjectPoolingManager.Instance.GetObject (m_player_explodes.name);
+		go.transform.position = gameObject.transform.position;
+		go.transform.rotation = gameObject.transform.rotation;
+		gameObject.SetActive (false);
+	}
 
 	// Use this for initialization
 	void Start () {
@@ -99,31 +120,31 @@ public class Player : Living {
 			m_horizontal * tr.right * Time.fixedDeltaTime * m_speed +
 			m_vertical * tr.up * Time.fixedDeltaTime * m_speed;
 
+//		if (tr.position.x > )
+
 		// Up Movement
-		if (Input.GetKey (KeyCode.UpArrow)) {
+		if ( (Input.GetKey (KeyCode.UpArrow)) || (Input.GetKey (KeyCode.W)) ) {
 			m_animator.SetInteger ("Direction", 2);
 		}
 
 		// Down Movement.
-		if (Input.GetKey (KeyCode.DownArrow)) {
+		if ( (Input.GetKey (KeyCode.DownArrow)) || (Input.GetKey (KeyCode.S)) ) {
 			m_animator.SetInteger ("Direction", 1);
 		}
 
 		// Right Movement
-		if (Input.GetKey (KeyCode.RightArrow)) {
+		if ( (Input.GetKey (KeyCode.RightArrow)) || (Input.GetKey (KeyCode.D)) ) {
 			m_animator.SetInteger ("Direction", 3);
 		}
 
 		// Left Movement
-		if (Input.GetKey (KeyCode.LeftArrow)) {
+		if ((Input.GetKey (KeyCode.LeftArrow)) || (Input.GetKey (KeyCode.A)) ){
 			m_animator.SetInteger ("Direction", 4);
 		}
 	}
 
 	// Triggered when a collision happens.
 	void OnTriggerEnter2D (Collider2D otherGameObject) {
-		Debug.Log ("Hit " + otherGameObject.gameObject.name);
-
 		// Checking if the enemy is a hulk or a grunt.
 		if (otherGameObject.gameObject.tag == "Grunt"){
 
@@ -143,7 +164,11 @@ public class Player : Living {
 				SoundManager.Instance.PlayerExplodes ();
 
 				// Disabling the player.
+				EventManager.StopListening ("Explode",Explode);
 				gameObject.SetActive (false);
+
+				// Activating gameover sequency.
+				gm.OnGameover ();
 			}
 		}
 
@@ -164,7 +189,11 @@ public class Player : Living {
 				SoundManager.Instance.PlayerExplodes ();
 
 				// Disabling the player.
+				EventManager.StopListening ("Explode",Explode);
 				gameObject.SetActive (false);
+
+				// Activating gameover sequency.
+				gm.OnGameover ();
 			}
 		}
 	}

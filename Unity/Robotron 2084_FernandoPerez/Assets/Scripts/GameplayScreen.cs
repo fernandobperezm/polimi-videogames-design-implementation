@@ -18,6 +18,10 @@ public class GameplayScreen : MonoBehaviour {
 		FillLives ();
 	}
 
+	void OnEnable () {
+		FillLives ();
+	}
+
 	// Fill all lives.
 	public void FillLives() {
 		foreach (Image image in m_array_live){

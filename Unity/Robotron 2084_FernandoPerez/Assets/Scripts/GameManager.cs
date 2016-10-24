@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class GameManager : MonoBehaviour {
@@ -28,6 +29,11 @@ public class GameManager : MonoBehaviour {
 	public GameObject m_score_screen;
 	public Text m_score;
 
+	// Gameover Screen.
+	[Header ("Gameover Screen")]
+	public GameObject m_gameover_screen;
+	public Text m_gameover_score;
+
 	// Score.
 	public int CurrentScore {get { return m_current_score;}}
 	private int m_current_score = 0;
@@ -42,13 +48,13 @@ public class GameManager : MonoBehaviour {
 
 	[Header ("Levels")]
 	public Level[] m_levels;
-	int m_no_levels = 8;
+	int m_no_levels = 10;
 
 	[Header ("Lives Sprites")]
 	public GameObject[] m_array_lives;
 
 	[Header ("Player and Lives")]
-	public Player m_player;
+	public GameObject m_player;
 	public GameplayScreen m_GamePlay_Screen;
 
 	void Awake () {
@@ -71,12 +77,13 @@ public class GameManager : MonoBehaviour {
 		ObjectPoolingManager.Instance.CreatePool (m_player_explodes,1,1);
 
 		m_current_score = 0;
-
-
+		m_current_level = 0;
 
 		m_loading_screen.SetActive (false);
 		m_gameplay_screen.SetActive (false);
 		m_score_screen.SetActive (false);
+
+		m_player.SetActive (true);
 
 		// Start coroutines.
 		StartCoroutine (NextLevel ());
@@ -84,17 +91,18 @@ public class GameManager : MonoBehaviour {
 
 	IEnumerator NextLevel() {
 		m_current_level += 1;
-		Debug.Log ("WAVE-" + m_current_level.ToString ());
 		m_level_text.text = "WAVE-" + m_current_level.ToString ();
 		m_loading_screen.SetActive (true);
 		m_gameplay_screen.SetActive (false);
 		m_score_screen.SetActive (false);
+		m_gameover_screen.SetActive (false);
 
 		yield return new WaitForSeconds (m_loading_time);
 
-		m_loading_screen.SetActive (false);
+		m_loading_screen.SetActive (true);
 		m_gameplay_screen.SetActive (true);
 		m_score_screen.SetActive (true);
+		m_gameover_screen.SetActive (false);
 		InitLevel (m_current_level);
 	
 	}
@@ -114,13 +122,19 @@ public class GameManager : MonoBehaviour {
 		// Creating a fized number of grunt forming a circle with center on the players position.
 		for (int i = 0; i < no_grunts; i++) {			
 			GameObject go = ObjectPoolingManager.Instance.GetObject (m_grunt.name);
-
-			float a = Random.Range (0, Mathf.PI * 2);
-			float r = Random.Range (160f, 300f);
-
+			float a;
+			float r;
 			Vector3 np = new Vector3 ();
-			np.x = Mathf.Cos (a) * r;
-			np.y = Mathf.Sin (a) * r;
+
+			do {
+				a = Random.Range (0, Mathf.PI * 2);
+				r = Random.Range (160f, 300f);
+
+				np.x = Mathf.Cos (a) * r;
+				np.y = Mathf.Sin (a) * r;
+
+			} while ( (Mathf.Abs (np.x - m_player.transform.position.x) < 100) || (Mathf.Abs (np.y - m_player.transform.position.y) < 50) );
+
 			np.z = transform.position.z;
 
 			go.transform.position = np;
@@ -135,7 +149,6 @@ public class GameManager : MonoBehaviour {
 			np.y = ((Random.Range (0,2) * 2) - 1) * Random.Range (100f,200f);
 			np.z = transform.position.z;
 
-			Debug.Log ("Position: " + np.ToString ());
 			go.transform.position = np;
 			go.transform.rotation = Quaternion.identity;
 		}
@@ -158,5 +171,23 @@ public class GameManager : MonoBehaviour {
 
 	public void UpdateLives(int lives_to_empty) {
 		m_GamePlay_Screen.EmptyFixedLives (lives_to_empty);
+	}
+
+	public void OnGameover() {
+		m_gameover_screen.SetActive (true);
+		m_loading_screen.SetActive (false);
+		m_gameplay_screen.SetActive (false);
+		m_score_screen.SetActive (false);
+
+		m_gameover_score.text = "Your Score: " + m_current_score.ToString ();
+		EventManager.TriggerEvent ("Explode");
+	}
+
+	public void OnPlayAgain() {
+		Start ();
+	}
+
+	public void OnMenu() {
+		SceneManager.LoadScene ("MenuScreen");
 	}
 }
