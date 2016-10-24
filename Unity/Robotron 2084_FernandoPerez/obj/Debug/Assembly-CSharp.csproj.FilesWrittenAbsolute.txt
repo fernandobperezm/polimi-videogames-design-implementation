@@ -1,0 +1,17 @@
+/Users/fernandoperez/Development/usb-projects/polimi-projects/Videogame Design And Implementation/Unity/Robotron 2084_FernandoPerez/Temp/bin/Debug/Assembly-CSharp.dll.mdb
+/Users/fernandoperez/Development/usb-projects/polimi-projects/Videogame Design And Implementation/Unity/Robotron 2084_FernandoPerez/Temp/bin/Debug/Assembly-CSharp.dll
+/Users/fernandoperez/Development/usb-projects/polimi-projects/Videogame Design And Implementation/Unity/Robotron 2084_FernandoPerez/obj/Debug/Assembly-CSharp.dll
+/Users/fernandoperez/Development/usb-projects/polimi-projects/Videogame Design And Implementation/Unity/Robotron 2084_FernandoPerez/obj/Debug/Assembly-CSharp.dll.mdb
+/Users/fernandoperez/Development/usb-projects/polimi-projects/Videogame Design And Implementation/Unity/Robotron 2084_FernandoPerez/Temp/bin/Debug/UnityEngine.dll
+/Users/fernandoperez/Development/usb-projects/polimi-projects/Videogame Design And Implementation/Unity/Robotron 2084_FernandoPerez/Temp/bin/Debug/UnityEditor.dll
+/Users/fernandoperez/Development/usb-projects/polimi-projects/Videogame Design And Implementation/Unity/Robotron 2084_FernandoPerez/Temp/bin/Debug/UnityEngine.Networking.dll
+/Users/fernandoperez/Development/usb-projects/polimi-projects/Videogame Design And Implementation/Unity/Robotron 2084_FernandoPerez/Temp/bin/Debug/UnityEngine.UI.dll
+/Users/fernandoperez/Development/usb-projects/polimi-projects/Videogame Design And Implementation/Unity/Robotron 2084_FernandoPerez/Temp/bin/Debug/Mono.Cecil.dll
+/Users/fernandoperez/Development/usb-projects/polimi-projects/Videogame Design And Implementation/Unity/Robotron 2084_FernandoPerez/Temp/bin/Debug/Unity.SerializationLogic.dll
+/Users/fernandoperez/Development/usb-projects/polimi-projects/Videogame Design And Implementation/Unity/Robotron 2084_FernandoPerez/Temp/bin/Debug/Unity.DataContract.dll
+/Users/fernandoperez/Development/usb-projects/polimi-projects/Videogame Design And Implementation/Unity/Robotron 2084_FernandoPerez/Temp/bin/Debug/ICSharpCode.NRefactory.dll
+/Users/fernandoperez/Development/usb-projects/polimi-projects/Videogame Design And Implementation/Unity/Robotron 2084_FernandoPerez/Temp/bin/Debug/Unity.UNetWeaver.dll
+/Users/fernandoperez/Development/usb-projects/polimi-projects/Videogame Design And Implementation/Unity/Robotron 2084_FernandoPerez/Temp/bin/Debug/Unity.UNetWeaver.dll.mdb
+/Users/fernandoperez/Development/usb-projects/polimi-projects/Videogame Design And Implementation/Unity/Robotron 2084_FernandoPerez/Temp/bin/Debug/Unity.CecilTools.dll
+/Users/fernandoperez/Development/usb-projects/polimi-projects/Videogame Design And Implementation/Unity/Robotron 2084_FernandoPerez/Temp/bin/Debug/Mono.Cecil.Pdb.dll
+/Users/fernandoperez/Development/usb-projects/polimi-projects/Videogame Design And Implementation/Unity/Robotron 2084_FernandoPerez/Temp/bin/Debug/Mono.Cecil.Mdb.dll

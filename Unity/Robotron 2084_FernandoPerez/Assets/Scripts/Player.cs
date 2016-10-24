@@ -22,11 +22,13 @@ public class Player : MonoBehaviour {
 	float m_horizontal = 0f;
 	float m_vertical = 0f;
 
-	// Use this for initialization
+	// Setting the animator for the player.
+	private Animator m_animator;
 
+	// Use this for initialization
 	void Start () {
 		tr = GetComponent<Transform> () as Transform;
-
+		m_animator = GetComponent<Animator> () as Animator;
 	}
 	
 	// Update is called once per frame
@@ -36,12 +38,13 @@ public class Player : MonoBehaviour {
 
 		// Right Shooting.
 		if (Input.GetKeyDown (KeyCode.L)) {
-			
 			GameObject go = ObjectPoolingManager.Instance.GetObject (m_shot_prefab.name);
 			go.transform.position = m_shot_right.position;
 			go.transform.rotation = m_shot_right.rotation;
 
 			SoundManager.Instance.PlayerShots();
+
+
 		}
 
 		// Left shooting.
@@ -77,5 +80,25 @@ public class Player : MonoBehaviour {
 		tr.position += 
 			m_horizontal * tr.right * Time.fixedDeltaTime * m_speed +
 			m_vertical * tr.up * Time.fixedDeltaTime * m_speed;
+
+		// Up Movement
+		if (Input.GetKey (KeyCode.UpArrow)) {
+			m_animator.SetInteger ("Direction", 2);
+		}
+
+		// Down Movement.
+		if (Input.GetKey (KeyCode.DownArrow)) {
+			m_animator.SetInteger ("Direction", 1);
+		}
+
+		// Right Movement
+		if (Input.GetKey (KeyCode.RightArrow)) {
+			m_animator.SetInteger ("Direction", 3);
+		}
+
+		// Left Movement
+		if (Input.GetKey (KeyCode.LeftArrow)) {
+			m_animator.SetInteger ("Direction", 4);
+		}
 	}
 }

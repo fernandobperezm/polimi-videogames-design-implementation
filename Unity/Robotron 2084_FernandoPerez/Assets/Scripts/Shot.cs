@@ -52,6 +52,9 @@ public class Shot : MonoBehaviour {
 			// Activating sound.
 			SoundManager.Instance.GruntExplodes ();
 
+			// Scoring for the player.
+			GameManager.Instance.Scored (100);
+
 			// Disabling the shot and the grunt.
 			otherGameObject.gameObject.SetActive (false);
 			gameObject.SetActive (false);
@@ -66,6 +69,9 @@ public class Shot : MonoBehaviour {
 
 			// Activating sound.
 			SoundManager.Instance.GruntExplodes ();
+
+			// Scoring for the player.
+			GameManager.Instance.Scored (1000);
 
 			// Disabling the shot and the grunt.
 			otherGameObject.gameObject.SetActive (false);

@@ -28,7 +28,7 @@ public class SoundManager : MonoBehaviour {
 
 	void Start() {
 		m_background_music.clip = m_menu_background;
-		m_background_music.Play ();
+		m_background_music.Play();
 	}
 
 	public void PlayerShots () {
