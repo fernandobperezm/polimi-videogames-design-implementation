@@ -44,6 +44,13 @@ public class GameManager : MonoBehaviour {
 	public Level[] m_levels;
 	int m_no_levels = 8;
 
+	[Header ("Lives Sprites")]
+	public GameObject[] m_array_lives;
+
+	[Header ("Player and Lives")]
+	public Player m_player;
+	public GameplayScreen m_GamePlay_Screen;
+
 	void Awake () {
 		//Singleton.
 		if (Instance == null) {
@@ -64,6 +71,8 @@ public class GameManager : MonoBehaviour {
 		ObjectPoolingManager.Instance.CreatePool (m_player_explodes,1,1);
 
 		m_current_score = 0;
+
+
 
 		m_loading_screen.SetActive (false);
 		m_gameplay_screen.SetActive (false);
@@ -145,5 +154,9 @@ public class GameManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 	
+	}
+
+	public void UpdateLives(int lives_to_empty) {
+		m_GamePlay_Screen.EmptyFixedLives (lives_to_empty);
 	}
 }

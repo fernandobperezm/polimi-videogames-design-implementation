@@ -28,6 +28,10 @@ public class Player : Living {
 	float m_horizontal = 0f;
 	float m_vertical = 0f;
 
+	[Header ("GameManager")]
+	// Getting the game manager.
+	public GameManager gm;
+
 	// Setting the animator for the player.
 	private Animator m_animator;
 
@@ -124,6 +128,7 @@ public class Player : Living {
 		if (otherGameObject.gameObject.tag == "Grunt"){
 
 			this.m_no_lives -= 1;
+			gm.UpdateLives (1);
 
 			if (this.m_no_lives == 0) {
 
@@ -144,9 +149,22 @@ public class Player : Living {
 
 		if (otherGameObject.gameObject.tag == "Hulk") { 
 			this.m_no_lives -= 1;
+			gm.UpdateLives (1);
 
-			if (this.m_no_lives == 0) { 
-				Debug.Log ("TE PEGO UN HULK");
+			if (this.m_no_lives == 0) {
+
+				// Instantiation of the grunt explodes game object.
+				GameObject go = ObjectPoolingManager.Instance.GetObject (m_player_explodes.name);
+
+				// Setting the position and rotation of the grunt exploded in the same as the grunt already shoted.
+				go.transform.position = otherGameObject.transform.position;
+				go.transform.rotation = otherGameObject.transform.rotation;
+
+				// Activating sound.
+				SoundManager.Instance.PlayerExplodes ();
+
+				// Disabling the player.
+				gameObject.SetActive (false);
 			}
 		}
 	}
