@@ -19,7 +19,7 @@ public class GameplayScreen : MonoBehaviour {
 	}
 
 	void OnEnable () {
-		FillLives ();
+		//FillLives ();
 	}
 
 	// Fill all lives.

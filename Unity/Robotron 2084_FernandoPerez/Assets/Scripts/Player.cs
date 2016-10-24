@@ -21,9 +21,6 @@ public class Player : Living {
 	[Range(100f,300f)]
 	public float m_speed = 150f;
 
-	// Flashing interval.
-	float m_flashing_interval = 0.25f;
-
 	// Get the keyboard input.
 	float m_horizontal = 0f;
 	float m_vertical = 0f;
@@ -35,14 +32,10 @@ public class Player : Living {
 	// Setting the animator for the player.
 	private Animator m_animator;
 
-	// Collider for player
-	BoxCollider2D m_player_collider;
-
 	void OnEnable() {
 		EventManager.StartListening ("Explode",Explode);
 		tr = GetComponent<Transform> () as Transform;
 		m_animator = GetComponent<Animator> () as Animator;
-		m_player_collider = GetComponent <BoxCollider2D> () as BoxCollider2D;
 		this.m_no_lives = 4;
 
 		tr.position = tr.right * 0;
@@ -55,9 +48,6 @@ public class Player : Living {
 
 	IEnumerator ExplodeCoroutine () {
 		yield return new WaitForSeconds (0.01f);
-		GameObject go = ObjectPoolingManager.Instance.GetObject (m_player_explodes.name);
-		go.transform.position = gameObject.transform.position;
-		go.transform.rotation = gameObject.transform.rotation;
 		gameObject.SetActive (false);
 	}
 
@@ -65,7 +55,6 @@ public class Player : Living {
 	void Start () {
 		tr = GetComponent<Transform> () as Transform;
 		m_animator = GetComponent<Animator> () as Animator;
-		m_player_collider = GetComponent <BoxCollider2D> () as BoxCollider2D;
 		this.m_no_lives = 4;
 
 	}

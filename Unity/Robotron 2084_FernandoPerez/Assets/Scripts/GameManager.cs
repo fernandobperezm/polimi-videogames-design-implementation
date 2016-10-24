@@ -34,6 +34,11 @@ public class GameManager : MonoBehaviour {
 	public GameObject m_gameover_screen;
 	public Text m_gameover_score;
 
+	// Gameover Screen.
+	[Header ("YouWin Screen")]
+	public GameObject m_youwin_screen;
+	public Text m_youwin_score;
+
 	// Score.
 	public int CurrentScore {get { return m_current_score;}}
 	private int m_current_score = 0;
@@ -79,9 +84,13 @@ public class GameManager : MonoBehaviour {
 		m_current_score = 0;
 		m_current_level = 0;
 
+		m_GamePlay_Screen.FillLives ();
+
 		m_loading_screen.SetActive (false);
 		m_gameplay_screen.SetActive (false);
 		m_score_screen.SetActive (false);
+		m_youwin_screen.SetActive (false);
+		m_gameover_screen.SetActive (false);
 
 		m_player.SetActive (true);
 
@@ -95,6 +104,7 @@ public class GameManager : MonoBehaviour {
 		m_loading_screen.SetActive (true);
 		m_gameplay_screen.SetActive (false);
 		m_score_screen.SetActive (false);
+		m_youwin_screen.SetActive (false);
 		m_gameover_screen.SetActive (false);
 
 		yield return new WaitForSeconds (m_loading_time);
@@ -109,14 +119,16 @@ public class GameManager : MonoBehaviour {
 
 	void InitLevel(int level) {
 		// Number of monsters, given the levels assets (scriptable object).
-		int no_grunts, no_hulks = 0;
+		int no_grunts = 0;
+		int no_hulks = 0;
+
 		if (level <= m_no_levels) {
 			no_grunts = m_levels [level - 1].m_no_grunts;
 			no_hulks = m_levels[level-1].m_no_hulks;
 		} else {
-			no_grunts = m_levels [m_no_levels -1].m_no_grunts;
-			no_hulks = m_levels[m_no_levels - 1].m_no_hulks;
+			OnWin ();
 		}
+
 		m_no_enemies_alive = no_grunts + no_hulks;
 
 		// Creating a fized number of grunt forming a circle with center on the players position.
@@ -173,8 +185,20 @@ public class GameManager : MonoBehaviour {
 		m_GamePlay_Screen.EmptyFixedLives (lives_to_empty);
 	}
 
+	public void OnWin() {
+		m_youwin_screen.SetActive (true);
+		m_gameover_screen.SetActive (false);
+		m_loading_screen.SetActive (false);
+		m_gameplay_screen.SetActive (false);
+		m_score_screen.SetActive (false);
+
+		m_youwin_score.text = "Your Score: " + m_current_score.ToString ();
+		EventManager.TriggerEvent ("Explode");
+	}
+
 	public void OnGameover() {
 		m_gameover_screen.SetActive (true);
+		m_youwin_screen.SetActive (false);
 		m_loading_screen.SetActive (false);
 		m_gameplay_screen.SetActive (false);
 		m_score_screen.SetActive (false);
