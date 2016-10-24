@@ -11,6 +11,8 @@ public class SoundManager : MonoBehaviour {
 	public AudioSource m_player_effects; // Manager of audio clips for the player actions.
 	public AudioClip m_shot_audioclip; // audio clip for the shot.
 	public AudioClip m_grunt_explodes_audioclip; // audio clip for the explotion of grunts
+	public AudioClip m_hulk_explodes_audioclip; // audio clip for the explotion of hulks.
+	public AudioClip m_player_explodes_audioclip; // Audio clip for the player explotion.
 
 	[Header("Background Music")]
 	public AudioClip m_menu_background;
@@ -37,5 +39,13 @@ public class SoundManager : MonoBehaviour {
 
 	public void GruntExplodes () {
 		m_player_effects.PlayOneShot (m_grunt_explodes_audioclip);
+	}
+
+	public void HulkExplodes () {
+		m_player_effects.PlayOneShot (m_hulk_explodes_audioclip);
+	}
+
+	public void PlayerExplodes () {
+		m_player_effects.PlayOneShot (m_player_explodes_audioclip);
 	}
 }

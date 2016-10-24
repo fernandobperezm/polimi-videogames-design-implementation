@@ -61,20 +61,29 @@ public class Shot : MonoBehaviour {
 		}
 
 		if (otherGameObject.gameObject.tag == "Hulk") {
-			GameObject go = ObjectPoolingManager.Instance.GetObject (m_hulk_explodes.name);
+			// Gettings
+			Living hk = otherGameObject.gameObject.GetComponent<Hulk> () as Hulk;
 
-			// Setting the position and rotation of the grunt exploded in the same as the grunt already shoted.
-			go.transform.position = otherGameObject.transform.position;
-			go.transform.rotation = otherGameObject.transform.rotation;
+			// Reducing the lives by 1.
+			hk.m_no_lives -= 1;
 
-			// Activating sound.
-			SoundManager.Instance.GruntExplodes ();
+			// Checking if died.
+			if (hk.m_no_lives == 0){
+				GameObject go = ObjectPoolingManager.Instance.GetObject (m_hulk_explodes.name);
+				// Setting the position and rotation of the grunt exploded in the same as the grunt already shoted.
+				go.transform.position = otherGameObject.transform.position;
+				go.transform.rotation = otherGameObject.transform.rotation;
 
-			// Scoring for the player.
-			GameManager.Instance.Scored (1000);
+				// Activating sound.
+				SoundManager.Instance.GruntExplodes ();
 
-			// Disabling the shot and the grunt.
-			otherGameObject.gameObject.SetActive (false);
+				// Scoring for the player.
+				GameManager.Instance.Scored (200);
+
+				// Disabling the shot and the grunt.
+				otherGameObject.gameObject.SetActive (false);
+			}
+
 			gameObject.SetActive (false);
 		}
 	}

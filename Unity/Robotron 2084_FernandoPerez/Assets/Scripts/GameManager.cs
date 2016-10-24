@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour {
 	public GameObject m_grunt_explodes;
 	public GameObject m_hulk;
 	public GameObject m_hulk_explodes;
+	public GameObject m_player_explodes;
 
 	// Level Management.
 	public int CurrentLevel {get {return m_current_level;}}
@@ -60,6 +61,7 @@ public class GameManager : MonoBehaviour {
 		ObjectPoolingManager.Instance.CreatePool (m_grunt_explodes, 100, 100);
 		ObjectPoolingManager.Instance.CreatePool (m_hulk, 100, 100);
 		ObjectPoolingManager.Instance.CreatePool (m_hulk_explodes, 100, 100);
+		ObjectPoolingManager.Instance.CreatePool (m_player_explodes,1,1);
 
 		m_current_score = 0;
 

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Grunt : MonoBehaviour {
+public class Grunt : Living {
 
 	Transform tr;
 
@@ -15,6 +15,11 @@ public class Grunt : MonoBehaviour {
 	void Start () {
 		player = GameObject.FindGameObjectWithTag ("Player");
 		tr = GetComponent<Transform> () as Transform;
+		this.m_no_lives = 1;
+	}
+
+	void OnEnable () {
+		this.m_no_lives = 1;
 	}
 	
 	// Update is called once per frame

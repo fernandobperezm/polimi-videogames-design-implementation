@@ -1,9 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Player : MonoBehaviour {
+public class Player : Living {
 	// Transform to get player's positions.
 	Transform tr;
+
+	[Header ("Player Explodes")]
+	public GameObject m_player_explodes;
 
 	[Header ("Shot Positions")]
 	public Transform m_shot_right;
@@ -18,6 +21,9 @@ public class Player : MonoBehaviour {
 	[Range(100f,300f)]
 	public float m_speed = 150f;
 
+	// Flashing interval.
+	float m_flashing_interval = 0.25f;
+
 	// Get the keyboard input.
 	float m_horizontal = 0f;
 	float m_vertical = 0f;
@@ -25,10 +31,18 @@ public class Player : MonoBehaviour {
 	// Setting the animator for the player.
 	private Animator m_animator;
 
+	// Collider for player
+	BoxCollider2D m_player_collider;
+
+
+
 	// Use this for initialization
 	void Start () {
 		tr = GetComponent<Transform> () as Transform;
 		m_animator = GetComponent<Animator> () as Animator;
+		m_player_collider = GetComponent <BoxCollider2D> () as BoxCollider2D;
+		this.m_no_lives = 4;
+
 	}
 	
 	// Update is called once per frame
@@ -99,6 +113,41 @@ public class Player : MonoBehaviour {
 		// Left Movement
 		if (Input.GetKey (KeyCode.LeftArrow)) {
 			m_animator.SetInteger ("Direction", 4);
+		}
+	}
+
+	// Triggered when a collision happens.
+	void OnTriggerEnter2D (Collider2D otherGameObject) {
+		Debug.Log ("Hit " + otherGameObject.gameObject.name);
+
+		// Checking if the enemy is a hulk or a grunt.
+		if (otherGameObject.gameObject.tag == "Grunt"){
+
+			this.m_no_lives -= 1;
+
+			if (this.m_no_lives == 0) {
+
+				// Instantiation of the grunt explodes game object.
+				GameObject go = ObjectPoolingManager.Instance.GetObject (m_player_explodes.name);
+
+				// Setting the position and rotation of the grunt exploded in the same as the grunt already shoted.
+				go.transform.position = otherGameObject.transform.position;
+				go.transform.rotation = otherGameObject.transform.rotation;
+
+				// Activating sound.
+				SoundManager.Instance.PlayerExplodes ();
+
+				// Disabling the player.
+				gameObject.SetActive (false);
+			}
+		}
+
+		if (otherGameObject.gameObject.tag == "Hulk") { 
+			this.m_no_lives -= 1;
+
+			if (this.m_no_lives == 0) { 
+				Debug.Log ("TE PEGO UN HULK");
+			}
 		}
 	}
 }
